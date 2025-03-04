@@ -65,13 +65,20 @@ onMounted(() => {
   padding: 20px 0;
   max-width: 700px;
 }
+
 .c-app__body {
   margin: 0 auto;
   padding-bottom: 40px;
   max-width: 1520px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min-content, 500px));
+  grid-template-columns: repeat(auto-fit, minmax(min-content, calc(50% - 5px)));
   gap: 10px;
   justify-content: center;
+}
+
+@media (min-width: 1026px) {
+  .c-app__body {
+    grid-template-columns: repeat(auto-fit, minmax(min-content, 500px));
+  }
 }
 </style>

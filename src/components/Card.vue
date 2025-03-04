@@ -23,6 +23,7 @@ const styles = computed(() => ({
 <style>
 .c-card {
   position: relative;
+  cursor: pointer;
 }
 
 .c-card__image {
