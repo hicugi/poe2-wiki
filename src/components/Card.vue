@@ -12,6 +12,11 @@ const styles = computed(() => ({
   <div class="c-card">
     <div class="c-card__image" :style="styles" />
     <h3 class="c-card__title">{{ props.title }}</h3>
+    <ul class="c-card__tags">
+      <template v-for="(item, index) in props.tags" :key="index">
+        <li>{{ item }}</li>
+      </template>
+    </ul>
   </div>
 </template>
 
@@ -43,6 +48,23 @@ const styles = computed(() => ({
   background-color: rgba(0,0,0,0.6);
   font-size: 28px;
   opacity: 0;
+}
+
+.c-card__tags {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 2px;
+  font-size: 11px;
+  list-style: none;
+}
+.c-card__tags li {
+  padding: 4px 6px;
+  background-color: rgba(0,0,0,0.6);
+  color: rgba(255,255,255,0.8);
 }
 
 .c-card:hover .c-card__title {
