@@ -1,12 +1,13 @@
 <script setup>
 import { ref, defineProps, computed, defineEmits, onMounted, onBeforeUnmount } from 'vue';
+import { getFilePath } from '../helper.js';
 
 const props = defineProps({ image: String, images: Array });
 
 const previewImage = ref(props.images[0].src);
 
 const mainStyles = computed(() => ({
-  backgroundImage: `url('${previewImage.value}')`,
+  backgroundImage: `url('${getFilePath(previewImage.value)}')`,
 }));
 
 const emit = defineEmits(['close']);
@@ -32,7 +33,7 @@ onBeforeUnmount(() => {
         <template v-for="(item, index) of props.images" :key="index">
           <li :class="{ active: previewImage === item.src }" @click="previewImage = item.src">
             <span>{{ item.title }}</span>
-            <img :src="item.src" />
+            <img :src="getFilePath(item.src)" />
           </li>
         </template>
       </ul>
