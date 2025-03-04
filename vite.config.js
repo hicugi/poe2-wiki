@@ -10,5 +10,6 @@ export default defineConfig({
   build: {
     outDir: 'docs',
   },
+  base: "poe2-wiki",
 })
 

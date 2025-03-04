@@ -1,10 +1,11 @@
 <script setup>
 import { defineProps, computed } from 'vue';
+import { getFilePath } from '../helper.js';
 
 const props = defineProps({ title: String, image: String, images: Array, tags: Array });
 
 const styles = computed(() => ({
-  backgroundImage: `url('${props.image}')`,
+  backgroundImage: `url('${getFilePath(props.image)}')`,
 }));
 </script>
 

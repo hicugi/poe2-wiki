@@ -1,3 +1,5 @@
+export const getFilePath = (val) => location.pathname + '/' + val;
+
 export function compare(word1, word2) {
   const rLen = word2.length + 1;
   const cLen = word1.length + 1;

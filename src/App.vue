@@ -3,7 +3,7 @@ import { ref, watch, onMounted } from 'vue';
 import UiSearchSelect from './components/Ui/SearchSelect.vue';
 import Card from './components/Card.vue';
 import CardPreview from './components/CardPreview.vue';
-import { compare } from './compare.js';
+import { getFilePath, compare } from './helper.js';
 
 const list = ref([]);
 const filteredList = ref([]);
@@ -37,7 +37,8 @@ function handleClose() {
 }
 
 onMounted(() => {
-  fetch('data.json').then((res) => res.json()).then((data) => {
+  const url = getFilePath('data.json');
+  fetch(url).then((res) => res.json()).then((data) => {
     list.value = data;
   });
 });
