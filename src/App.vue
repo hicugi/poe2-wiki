@@ -2,11 +2,13 @@
 import { ref, watch, onMounted } from 'vue';
 import UiSearchSelect from './components/Ui/SearchSelect.vue';
 import Card from './components/Card.vue';
+import CardPreview from './components/CardPreview.vue';
 import { compare } from './compare.js';
 
 const list = ref([]);
 const filteredList = ref([]);
 const search = ref('');
+const preview = ref(null);
 
 watch(list, (newList) => {
   filteredList.value = newList;
@@ -27,6 +29,13 @@ watch(search, (value) => {
   }, 300);
 });
 
+function handleSelect(item) {
+  preview.value = item;
+}
+function handleClose() {
+  preview.value = null;
+}
+
 onMounted(() => {
   fetch('data.json').then((res) => res.json()).then((data) => {
     list.value = data;
@@ -42,9 +51,11 @@ onMounted(() => {
 
     <div class="c-app__body">
       <template v-for="(item, index) in filteredList" :key="index">
-        <Card v-bind="item" />
+        <Card v-bind="item" @click="handleSelect(item)" />
       </template>
     </div>
+
+    <CardPreview v-if="preview" v-bind="preview" @close="handleClose" />
   </div>
 </template>
 
