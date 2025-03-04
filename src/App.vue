@@ -1,18 +1,30 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import UiSearchSelect from './components/Ui/SearchSelect.vue';
 import Card from './components/Card.vue';
+import { compare } from './compare.js';
 
 const list = ref([]);
+const filteredList = ref([]);
 const search = ref('');
 
-const filteredList = computed(() => {
-  const items = list.value;
-  const { value } = search;
+watch(list, (newList) => {
+  filteredList.value = newList;
+});
 
-  if (value === '') return items;
+let timeout;
+watch(search, (value) => {
+  clearTimeout(timeout);
 
-  return items.filter((el) => el.tags.includes(value));
+  timeout = setTimeout(() => {
+    let items = list.value;
+
+    if (value !== '') {
+      items = items.filter((el) => el.tags.some((v) => compare(v, value)));
+    }
+
+    filteredList.value = items;
+  }, 300);
 });
 
 onMounted(() => {
@@ -25,7 +37,7 @@ onMounted(() => {
 <template>
   <div>
     <div class="c-app__header">
-      <UiSearchSelect label="Map name" />
+      <UiSearchSelect label="Map name" v-model="search" />
     </div>
 
     <div class="c-app__body">
