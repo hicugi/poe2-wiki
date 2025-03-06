@@ -44,6 +44,8 @@ onBeforeUnmount(() => {
 <style>
 .c-cardPreview {
   --border-color: #4d4533;
+  --footer-height: 140px;
+
   position: fixed;
   left: 0;
   top: 0;
@@ -106,6 +108,7 @@ onBeforeUnmount(() => {
 
 .c-cardPreview-images__main {
   margin-bottom: 20px;
+  max-height: calc(100vh - var(--footer-height) - 30px);
   border: 1px solid var(--border-color);
   background: #000 no-repeat center;
   background-size: contain;
@@ -119,7 +122,7 @@ onBeforeUnmount(() => {
 .c-cardPreview-images__list {
   margin: 0;
   padding: 0;
-  height: 140px;
+  height: var(--footer-height);
   display: flex;
   justify-content: center;
   align-items: center;
